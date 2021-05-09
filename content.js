@@ -12,3 +12,5 @@ fetch(callApi)
     console.log('ERROR FETCHING THE API')
     //error getting data, now display blank(greyed out) score
   })
+
+//on load and on message from popup click => adjust rating for num of review and display in a colored circle/ if reviewmeta enabled but api fetch failed => display unfiltered review score but add (couldn't access reviewmeta......)
