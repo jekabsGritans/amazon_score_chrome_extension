@@ -4,14 +4,20 @@ const callApi = `https://reviewmeta.com/api/amazon/${product_code}`;
 var revMEnabled = true;
 var popSpan = document.getElementById("averageCustomerReviews");
 var letSpace = popSpan.getElementsByClassName("a-letter-space")[1];
+
+
+
 var newRate = document.createElement("span");
-
-
 newRate.setAttribute('id', 'scoreDisplay');
-newRate.setAttribute('style', 'color:red');
+newRate.setAttribute('style', 'color:white');
 newRate.innerHTML = '[.]';
-popSpan.insertBefore(newRate, letSpace);
 
+var rateIcon = document.createElement("span");
+rateIcon.appendChild(newRate);
+rateIcon.setAttribute('style','border-radius: 5px; background: #FFA41C; padding: 3px; width: 25px; height: 15px')
+
+
+popSpan.insertBefore(rateIcon, letSpace);
 
 function setScore(rating, num) {
   document.getElementById("scoreDisplay").innerHTML = rating * 2
