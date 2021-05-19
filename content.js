@@ -1,21 +1,34 @@
 var main_num_reviews = parseInt(document.getElementById("acrCustomerReviewText").innerHTML.split(' ')[0].replace(/,/g, ''));
 var product_code = window.location.pathname.split('/')[3];
-const callApi = `https://reviewmeta.com/api/amazon/${product_code}`
+const callApi = `https://reviewmeta.com/api/amazon/${product_code}`;
+var revMEnabled = true;
+var popSpan = document.getElementById("averageCustomerReviews");
+var letSpace = popSpan.getElementsByClassName("a-letter-space")[1];
+var newRate = document.createElement("span");
 
-fucntion getScore(score,num) {
-  return score
+
+newRate.setAttribute('id', 'scoreDisplay');
+newRate.setAttribute('style', 'color:red');
+newRate.innerHTML = '[.]';
+popSpan.insertBefore(newRate, letSpace);
+
+
+function setScore(rating, num) {
+  document.getElementById("scoreDisplay").innerHTML = rating * 2
 }
-
 
 fetch(callApi)
   .then(response => response.json())
-  .then(data => { //data.rating and data.count    alert(data.rating)
-    if ()
-    alert(getScore(data.rating,data.count))
+  .then(data => {
+    if (revMEnabled) {
+      setScore(data.rating, data.num)
+    } else {
+      //
+    }
+
   })
   .catch(error => {
-    console.log('ERROR FETCHING THE API')
-    //error getting data, now display blank(greyed out) score
+    console.log(error)
   })
 
 //on load and on message from popup click => adjust rating for num of review and display in a colored circle/ if reviewmeta enabled but api fetch failed => display unfiltered review score but add (couldn't access reviewmeta......)
