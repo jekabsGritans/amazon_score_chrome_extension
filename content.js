@@ -1,9 +1,10 @@
+
 var main_num_reviews = parseInt(document.getElementById("acrCustomerReviewText").innerHTML.split(' ')[0].replace(/,/g, ''));
 var product_code = window.location.pathname.split('/')[3];
 const callApi = `https://reviewmeta.com/api/amazon/${product_code}`;
 var revMEnabled = true;
 var popSpan = document.getElementById("averageCustomerReviews");
-var letSpace = popSpan.getElementsByClassName("a-letter-space")[1];
+var letSpace = popSpan.getElementsByClassName("a-declarative")[0]; //("a-letter-space")[1];
 
 
 
@@ -14,20 +15,20 @@ newRate.innerHTML = '[.]';
 
 var rateIcon = document.createElement("span");
 rateIcon.appendChild(newRate);
-rateIcon.setAttribute('style','border-radius: 5px; background: #FFA41C; padding: 3px; width: 25px; height: 15px')
+rateIcon.setAttribute('style','border-radius: 5px; background: #F0BF94; padding: 3px; width: 25px; height: 15px')
 
 
 popSpan.insertBefore(rateIcon, letSpace);
 
 function setScore(rating, num) {
-  document.getElementById("scoreDisplay").innerHTML = rating * 2
+document.getElementById("scoreDisplay").innerHTML = Math.round((parseInt(rating)/5*parseInt(num)+1)/(parseInt(num)+2)*5,2)
 }
 
 fetch(callApi)
   .then(response => response.json())
   .then(data => {
     if (revMEnabled) {
-      setScore(data.rating, data.num)
+      setScore(data.rating, data.count)
     } else {
       //
     }
