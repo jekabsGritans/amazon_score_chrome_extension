@@ -1,5 +1,8 @@
- document.querySelector('button').addEventListener('click', onclick, false)
+ document.querySelector('div').addEventListener('click', function(){
+   chrome.tabs.query({currentWindow: true, active: true}, function (tabs){
+     var activeTab = tabs[0];
+     chrome.tabs.sendMessage(activeTab.id, {command: "changeLegit"});
 
- function onclick () {
-   //enable-disable reviewmeta review adjuster
- }
+ });
+
+});
